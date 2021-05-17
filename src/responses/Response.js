@@ -33,3 +33,9 @@ export class SuccessResponse extends Response {
     });
   }
 }
+
+export class BadRequestResponse extends Response {
+  constructor(message) {
+    super(400, message);
+  }
+}

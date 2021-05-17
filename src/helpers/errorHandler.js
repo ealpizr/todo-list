@@ -1,11 +1,23 @@
-import { ApiError, InternalError } from "../responses/Error";
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
+import { ApiError, InternalError, BadRequestError } from "../responses/Error";
 
-// eslint-disable-next-line no-unused-vars
 export default (err, _, res, __) => {
   if (err instanceof ApiError) {
-    ApiError.handle(err, res);
-    return;
+    return ApiError.handle(err, res);
   }
+
+  /*
+    express.json() throws a 400 error code
+    when the body contains invalid json
+  */
+  if (err instanceof SyntaxError && err.statusCode === 400) {
+    return ApiError.handle(
+      new BadRequestError("Bad Request, Invalid JSON"),
+      res
+    );
+  }
+
   console.log(err);
   ApiError.handle(new InternalError(), res);
 };
