@@ -1,26 +1,18 @@
 import "dotenv/config";
 import express from "express";
 import db from "./db";
-import todo from "./models/todo";
+import routes from "./routes";
+import { NotFoundError } from "./responses/Error";
+import errorHandler from "./helpers/errorHandler";
 
 const { MONGO_URI, EXPRESS_PORT } = process.env;
 
 const app = express();
 app.use(express.json());
+app.use(routes);
 
-app.get("/", async (_, res) => {
-  todo
-    .create({
-      task: "Todo from Express",
-    })
-    .then(t => {
-      res.status(201).send({ t });
-    })
-    .catch(e => {
-      res.status(500).send({ error: "internal error" });
-      console.log(e);
-    });
-});
+app.use((_, __, next) => next(new NotFoundError()));
+app.use(errorHandler);
 
 db.connect(MONGO_URI, () => {
   app.listen(EXPRESS_PORT, () => {
