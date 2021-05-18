@@ -1,13 +1,25 @@
 import React from 'react'
+import moment from 'moment'
 import TodoItem from './TodoItem'
 import './TodoList.css'
 
-const TodoList = () => {
+const TodoList = props => {
+  /* 
+    Props could be cleaned up
+  */
   return (
     <div className="todo-list">
-      <TodoItem task="Go for a walk" createdAt="10:25" />
-      <TodoItem task="Take a shower" createdAt="11:50" />
-      <TodoItem task="Buy groceries" createdAt="12:00" />
+      {props.todos.map(t => (
+        <TodoItem
+          key={t.id}
+          id={t.id}
+          task={t.task}
+          completed={t.completed}
+          createdAt={moment(t.createdAt).format('hh:mm a')}
+          deleteTodo={props.deleteTodo}
+          completeTodo={props.completeTodo}
+        />
+      ))}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import db from "./db";
 import routes from "./routes";
 import { NotFoundError } from "./responses/Error";
@@ -9,6 +10,7 @@ const { MONGO_URI, EXPRESS_PORT } = process.env;
 
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(routes);
 
 app.use((_, __, next) => next(new NotFoundError()));
