@@ -1,0 +1,18 @@
+.header {
+  font-family: 'Roboto';
+  text-align: center;
+  margin-bottom: 5vh;
+}
+
+.title {
+  font-size: 3em;
+  font-weight: 700;
+  color: #f7a440;
+  margin: 2vh 0 1vh 0;
+}
+
+.subtitle {
+  margin: 0;
+  font-weight: 500;
+  color: #f7a440;
+}

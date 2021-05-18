@@ -1,0 +1,96 @@
+.todo-item {
+  white-space: nowrap;
+  margin-bottom: 20px;
+}
+
+.todo-task {
+  font-family: 'Roboto';
+  display: inline-block;
+  margin: 0;
+  font-size: 1.5em;
+  vertical-align: middle;
+  color: #252525;
+  width: 50%;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.todo-delete {
+  vertical-align: middle;
+  display: inline;
+  font-size: 2em;
+  color: #252525;
+  transition: color 0.2s ease;
+}
+
+.todo-delete:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.todo-time {
+  font-size: 14px;
+  font-family: 'Roboto';
+  margin: 0;
+  color: #6c757d;
+}
+
+.todo-clock {
+  font-size: 12px;
+}
+
+.container {
+  margin-left: 20%;
+  float: left;
+  position: relative;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  transition: background-color 0.2s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #dee2e6;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ced4da;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #f7a440;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
